@@ -1,0 +1,9 @@
+﻿  projet_00.cpp
+projet_00.cpp(267): warning C4244: '=': conversion from 'int64' to 'double', possible loss of data
+  Generating code
+  9 of 230 functions ( 3.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  projet_00.vcxproj -> D:\Projet de sem\code\VS\projet_00\x64\Release\projet_00.exe
+  projet_00.vcxproj -> D:\Projet de sem\code\VS\projet_00\x64\Release\projet_00.pdb (Full PDB)
