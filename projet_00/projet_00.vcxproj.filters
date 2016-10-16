@@ -21,13 +21,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="blackmagic\targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="multipleImages.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

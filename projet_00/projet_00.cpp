@@ -3,14 +3,11 @@
 // inspired from http://r3dux.org/
 // Library dependencies: OpenCV core, video and highgui libs, GL, glew, glfw
 // Kinect with OpenCV usage guide: http://opencv.itseez.com/doc/user_guide/ug_highgui.html
-
 #include "stdafx.h"
+#include "multipleImages.hpp"
 //#include "glew.h"
-#include <opencv2/opencv.hpp>
-#include <opencv\highgui.h>
 //#include <GLFW/glfw3.h>
 //#include <GLFW\glfw3native.h>
-#include "multipleImages.hpp"
 //#include <gl\GL.h>
 //#include <gl\GLU.h>
 #define WAIT 30 //wait in ms after each frame
@@ -34,6 +31,7 @@ char * title = "3d Drone view";
 int    frameCount = 0;
 double frameStartTime, frameEndTime, frameRate;
 //GLFWwindow* window = NULL;
+
 
 
 // Function turn a cv::Mat into a texture, and return the texture ID as a GLuint for use
@@ -201,7 +199,7 @@ void addInfoLayer(Mat frame) {
 	//empty stream
 	textstream.str(std::string());
 	//draw text onto frame
-	putText(frame, text, cvPoint(100, 100), FONT_HERSHEY_PLAIN, 2, color);
+	putText(frame, text, cvPoint(100, 100), cv::FONT_HERSHEY_PLAIN, 2, color);
 
 	//write text into stringstream
 	textstream << "fps: " << (int)frameRate;
@@ -210,7 +208,7 @@ void addInfoLayer(Mat frame) {
 	//empty stream
 	textstream.str(std::string());
 	//draw text onto frame
-	putText(frame, text, cvPoint(100, 400), FONT_HERSHEY_PLAIN, 2, color);
+	putText(frame, text, cvPoint(100, 400), cv::FONT_HERSHEY_PLAIN, 2, color);
 }
 
 /*Takes care of the inputs occured on the display window*/

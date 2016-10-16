@@ -1,6 +1,4 @@
 #include "stdafx.h"
-#include <opencv2/opencv.hpp>
-#include <opencv\highgui.h>
   
   #include <stdio.h>
   #include <stdarg.h>

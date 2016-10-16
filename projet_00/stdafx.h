@@ -4,14 +4,16 @@
 //
 
 #pragma once
-
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "targetver.h"
 #include <iostream>
 #include <stdio.h>
 #include <tchar.h>
-extern "C" {
-#include "DeckLinkAPI_h.h"
-}
+
+#include <opencv2/opencv.hpp>
+#include <opencv/highgui.h>
 
 
 

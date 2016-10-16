@@ -141,26 +141,25 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Projet de sem\code\VS\library\oglplus\implement;D:\Projet de sem\code\VS\library\oglplus\include;D:\oglplus\include;D:\glew-2.0.0\include\GL;D:\Projet de sem\glfw\include;D:\opencv-build\install\include</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>D:\opencv-build\install\include</AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>C:\opencv-build\install\include</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>C:\opencv-build\install\include</AdditionalUsingDirectories>
+      <UseFullPaths>true</UseFullPaths>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGLPLUS_DEP_LIBS);D:\glew-2.0.0\lib\Release\x64;D:\Projet de sem\glfw\lib-vc2015;D:\opencv-build\install\x64\vc14\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;glew32.lib;opengl32.lib;glfw3.lib;glfw3dll.lib;opencv_core310.lib;opencv_highgui310.lib;opencv_imgproc310.lib;opencv_imgcodecs310.lib;opencv_video310.lib;opencv_videoio310.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opencv-build\install\x64\vc14\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;opencv_imgproc310.lib;opencv_imgcodecs310.lib;opencv_video310.lib;opencv_videoio310.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="blackmagic\targetver.h" />
     <ClInclude Include="multipleImages.hpp" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="multipleImages.cpp" />
