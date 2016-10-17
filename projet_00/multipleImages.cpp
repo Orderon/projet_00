@@ -3,7 +3,14 @@
   #include <stdio.h>
   #include <stdarg.h>
 #include "multipleImages.hpp"
-#define DIST_X -1 //-1 for no border at all
+#define DIST_X 200 //-1 for no border at all
+#define DIST_I 380 //distance between the two images
+#define DIST_Y 200 //distance between border & first image
+#define MAX_SIZE 550
+
+// TODO: optimise cvShowManyImages !!!
+
+using namespace cv;
 
 int wWidth = 1200; //oculus: 2160
 int wHeigth = 900;
@@ -58,6 +65,8 @@ int wHeigth = 900;
  modified to the purpose of this project by Cyrill Baumann
  ///////////////////////////////////////////////////////////////////////*/
  
+
+
  void cvShowManyImages(char* title, int nArgs, ...) {
  
      // img - Used for getting the arguments 
@@ -96,22 +105,14 @@ int wHeigth = 900;
          w = h = 1;
         size = wWidth;
      }
+	//the case of our utilisation
     else if (nArgs == 2) {
-         w = 2; h = 1;
-        size = (wWidth)/2;
+         w = 1; h = 2;
+        size = (wHeigth-DIST_Y)/2;
+		size = MAX_SIZE;
+		std::cout << "Wheight: " << wHeigth << "\n";
      }
-   else if (nArgs == 3 || nArgs == 4) {
-        w = 2; h = 2;
-        size = 300;
-    }
-    else if (nArgs == 5 || nArgs == 6) {
-        w = 3; h = 2;
-        size = 200;
-    }
-    else if (nArgs == 7 || nArgs == 8) {
-        w = 4; h = 2;
-        size = 200;
-    }
+  
     else {
        w = 4; h = 3;
         size = 150;
@@ -119,13 +120,13 @@ int wHeigth = 900;
 
    // Create a new 3 channel image
 	int margin_x = DIST_X > 0 ? DIST_X : 0;
-    DispImage  = cvCreateImage( cvSize(margin_x+size*w, size*h), 8, 3 );
+    DispImage  = cvCreateImage( cvSize(wWidth+margin_x,  DIST_I+DIST_Y+500+ size*h), 8, 3 );
     // Used to get the arguments passesd
     va_list args;
    va_start(args, nArgs);
 
    // Loop for nArgs number of arguments
-    for (i = 0, m = 0, n = 20; i < nArgs; i++, m += (DIST_X + size)) {
+    for (i = 0, m = DIST_X, n = DIST_Y; i < nArgs; i++, m += (size)) {
 
        // Get the Pointer to the IplImage
         img = va_arg(args, IplImage*);
@@ -146,13 +147,20 @@ int wHeigth = 900;
         max = (x > y)? x: y;
 
         // Find the scaling factor to resize the image
-        scale = (float) ( (float) max / size );
+		scale = (float) ( (float)y / size);
+
+		//check for too big scale
+		scale = (y / scale > MAX_SIZE) ? (y/MAX_SIZE) : scale;
 
         // Used to Align the images
-        if( i % w == 0 && m!= 10) {
-         //   m = 10;
-          //  n+= 10 + size;
-        }
+       // if( i % w == 0 && m!= 10) {
+       //  m = 10;
+       //   n+= 10 + size;
+      //  }
+		if (i == 1) {
+			n = DIST_I+DIST_Y+y/scale;
+			m = DIST_X;
+		}
 
         // Set the image ROI to display the current image
         cvSetImageROI(DispImage, cvRect(m, n, (int)( x/scale ), (int)( y/scale )));
@@ -181,3 +189,4 @@ void setWindowSize(int width, int height)
 	wHeigth = height;
 	std::cout << "New width: " << wWidth << "\t height: " << wHeigth << "\n";
 }
+

@@ -11,12 +11,14 @@
 //#include <gl\GL.h>
 //#include <gl\GLU.h>
 #define WAIT 30 //wait in ms after each frame
-#define EYE_DISTANCE 50//50 //in px
-#define EYE_ANGLE 2//2 //degrees
-#define INPLANE_ROT 0 //degrees
+#define EYE_DISTANCE 0//50 //in px
+#define EYE_ANGLE 5//2 //degrees
+#define INPLANE_ROT -90 //90 degrees rotation for oculus!
 #define LIMIT_FPS 20 //max frames per second
-#define FULLSCREEN_W  1500
-#define FULLSCREEN_H 1000
+#define FULLSCREEN_W  2060
+#define FULLSCREEN_H 2060
+#define INIT_X 900
+#define INIT_Y 600
 bool shouldExit = false; // set true to terminate.
 
 using namespace cv;
@@ -161,14 +163,14 @@ void draw(Mat frame, char* title) {
 	Mat left, right; //create Mat to store viewpoints
 
 	// calculate perspectives
-	int left_a = 90;
-	int left_b = (90 + EYE_ANGLE / 2);
+	int left_b = 90;
+	int left_a = (90 + EYE_ANGLE / 2);
 	int left_c = 90 + INPLANE_ROT;
 	int left_dx = -(EYE_DISTANCE / 2);
 	int left_dy = 0;
 	int dz = 200;
-	int right_a = 90;
-	int right_b = (90 - EYE_ANGLE / 2);
+	int right_b = 90;
+	int right_a = (90 - EYE_ANGLE / 2);
 	int right_c = 90 + INPLANE_ROT;
 	int right_dx = (EYE_DISTANCE / 2);
 	int right_dy = 0;
@@ -179,6 +181,8 @@ void draw(Mat frame, char* title) {
 	//convert to IplImage for drawing
 	IplImage* imLeft = cvCloneImage(&(IplImage)left);
 	IplImage* imRight = cvCloneImage(&(IplImage)right);
+	namedWindow("test");
+	cvShowImage("test", imLeft);
 
 	//draw on splitscreen
 	cvShowManyImages(title, 2, imLeft, imRight);
@@ -199,7 +203,7 @@ void addInfoLayer(Mat frame) {
 	//empty stream
 	textstream.str(std::string());
 	//draw text onto frame
-	putText(frame, text, cvPoint(100, 100), cv::FONT_HERSHEY_PLAIN, 2, color);
+	putText(frame, text, cvPoint(80, 25), cv::FONT_HERSHEY_PLAIN, 2, color);
 
 	//write text into stringstream
 	textstream << "fps: " << (int)frameRate;
@@ -243,7 +247,7 @@ int main() {
 
 	// Initialize openCV
 	Mat frame;							  //Create Matrix to store image
-	VideoCapture cap(0);				  //create videostream
+	VideoCapture cap(1);				  //create videostream
 	if (!cap.isOpened())				  // check if we succeeded
 		return -1;
 	
@@ -251,7 +255,7 @@ int main() {
 	cvNamedWindow(title, 1);
 
 	resizeWindow(title, 1200, 900);
-	setWindowSize(1200, 900);
+	setWindowSize(INIT_X, INIT_Y);
 	//initGL();
 
 	cout << "Initalized..\n";
