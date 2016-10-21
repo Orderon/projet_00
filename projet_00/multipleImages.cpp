@@ -3,8 +3,8 @@
   #include <stdio.h>
   #include <stdarg.h>
 #include "multipleImages.hpp"
-#define DIST_X 200 //-1 for no border at all
-#define DIST_I 380 //distance between the two images
+#define DIST_X 180 //-1 for no border at all
+#define DIST_I 180 //distance between the two images
 #define DIST_Y 200 //distance between border & first image
 #define MAX_SIZE 550
 
@@ -120,7 +120,8 @@ int wHeigth = 900;
 
    // Create a new 3 channel image
 	int margin_x = DIST_X > 0 ? DIST_X : 0;
-    DispImage  = cvCreateImage( cvSize(wWidth+margin_x,  DIST_I+DIST_Y+500+ size*h), 8, 3 );
+   // DispImage  = cvCreateImage( cvSize(2*wWidth+margin_x,  DIST_I+DIST_Y+500+ size*h), 8, 3 );
+	DispImage = cvCreateImage(cvSize(2600, 2600), 8, 3);
     // Used to get the arguments passesd
     va_list args;
    va_start(args, nArgs);
@@ -158,8 +159,8 @@ int wHeigth = 900;
        //   n+= 10 + size;
       //  }
 		if (i == 1) {
-			n = DIST_I+DIST_Y+y/scale;
-			m = DIST_X;
+			n = DIST_Y;
+			m = DIST_X + DIST_I + x/scale;
 		}
 
         // Set the image ROI to display the current image
